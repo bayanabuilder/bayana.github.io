@@ -347,6 +347,73 @@
     .footer-inner { padding: 0 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
   }
 
+  /* ── ABOUT / WHAT IT IS ───────────────────────────── */
+  .about {
+    padding: 160px 0;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--line);
+  }
+  .about-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 64px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .about-eyebrow::before {
+    content: '';
+    width: 36px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .about-lead {
+    font-size: clamp(24px, 3.2vw, 44px);
+    font-weight: 500;
+    line-height: 1.22;
+    letter-spacing: -0.015em;
+    color: var(--fg);
+    max-width: 1100px;
+    margin-bottom: 56px;
+  }
+  .about-body {
+    font-size: clamp(16px, 1.4vw, 20px);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 900px;
+    margin-bottom: 28px;
+  }
+  .about-body .stack-label {
+    color: var(--fg);
+    font-weight: 600;
+  }
+  .pull-quote {
+    margin-top: 96px;
+    padding-left: 32px;
+    border-left: 3px solid var(--accent);
+    max-width: 980px;
+  }
+  .pull-quote p {
+    font-size: clamp(28px, 3.6vw, 52px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+  .pull-quote .emphasis {
+    color: var(--accent);
+  }
+  @media (max-width: 768px) {
+    .about { padding: 96px 0; }
+    .about-eyebrow { margin-bottom: 40px; }
+    .about-lead { margin-bottom: 36px; }
+    .pull-quote { margin-top: 64px; padding-left: 20px; }
+  }
+
   /* ── REVEAL ANIMATIONS ────────────────────────────── */
   .reveal {
     opacity: 0;
@@ -389,6 +456,20 @@
     <h1 class="wordmark reveal reveal-2">BAYANA</h1>
     <div class="eyebrow-orange reveal reveal-3" style="margin-top: 24px;">COMPLIANCE INFRASTRUCTURE FOR DIGITAL ASSETS</div>
     <p class="lede reveal reveal-4">Plug &amp; play licensed, non-custodial AI compliance infrastructure for digital assets.</p>
+  </div>
+</section>
+
+<!-- ABOUT / WHAT IT IS -->
+<section class="about grid-bg">
+  <div class="container">
+    <div class="about-eyebrow">What it is</div>
+    <p class="about-lead">Bayana is non-custodial, compliance-native AI infrastructure for digital assets and stablecoins, built for regulated markets in the Global South.</p>
+    <p class="about-body"><span class="stack-label">The stack:</span> NURU AI, ZK identity, agentic fraud detection, non-custodial MPC, KYC/KYB, AML and sanctions, transaction monitoring, holds and releases, regulator-ready reporting.</p>
+    <p class="about-body">Delaware parent. Local subsidiaries across Africa, Asia, MENA, and LATAM as we scale. Kenya first. VASP Act 2025 is law, and the volume is here.</p>
+    <div class="pull-quote">
+      <p>Most teams wrap compliance.</p>
+      <p class="emphasis">Bayana is built through it.</p>
+    </div>
   </div>
 </section>
 
