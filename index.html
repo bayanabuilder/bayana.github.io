@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bayana — Compliance Infrastructure for Digital Assets</title>
+<meta name="description" content="Plug & play licensed, non-custodial AI compliance infrastructure for digital assets." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --fg: #ffffff;
+    --muted: #9a9a9a;
+    --accent: #ff4d1f;
+    --grid: #1a1a1a;
+    --font: 'Archivo', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--accent); color: #000; }
+  a { color: inherit; text-decoration: none; }
+
+  .grid-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 80px 80px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 64px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+  @media (max-width: 768px) {
+    .container { padding: 0 28px; }
+  }
+
+  .slide {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding: 80px 0;
+  }
+
+  /* SLIDE 1 */
+  .wordmark {
+    font-weight: 900;
+    font-size: clamp(72px, 16vw, 240px);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    margin-bottom: 56px;
+  }
+
+  .accent-bar {
+    width: 280px;
+    max-width: 60%;
+    height: 5px;
+    background: var(--accent);
+    margin-bottom: 44px;
+  }
+
+  .eyebrow-orange {
+    color: var(--accent);
+    font-size: clamp(15px, 1.9vw, 26px);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 56px;
+    line-height: 1.2;
+  }
+
+  .lede {
+    color: var(--muted);
+    font-size: clamp(15px, 1.4vw, 22px);
+    font-weight: 400;
+    max-width: 820px;
+    line-height: 1.5;
+  }
+
+  /* SLIDE 12 */
+  .slide-cta-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: calc(100vh - 160px);
+  }
+
+  .cta-top { padding-top: 40px; }
+
+  .eyebrow-tight {
+    color: var(--accent);
+    font-size: clamp(13px, 1.3vw, 20px);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+
+  .headline {
+    font-weight: 900;
+    font-size: clamp(80px, 18vw, 280px);
+    line-height: 0.88;
+    letter-spacing: -0.045em;
+    margin-bottom: 56px;
+  }
+
+  .subtext {
+    color: var(--fg);
+    font-size: clamp(14px, 1.5vw, 24px);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    max-width: 1100px;
+    line-height: 1.4;
+  }
+
+  .underline-accent {
+    width: 320px;
+    max-width: 60%;
+    height: 3px;
+    background: var(--accent);
+  }
+
+  .founder { padding-bottom: 20px; }
+  .founder-name {
+    font-weight: 700;
+    font-size: clamp(20px, 1.8vw, 28px);
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 1px;
+    margin-bottom: 8px;
+  }
+  .founder-title {
+    color: var(--muted);
+    font-size: clamp(14px, 1.1vw, 17px);
+    margin-bottom: 8px;
+  }
+  .founder-email {
+    color: var(--accent);
+    font-size: clamp(14px, 1.1vw, 17px);
+    transition: opacity 0.2s;
+  }
+  .founder-email:hover { opacity: 0.75; }
+
+  /* Reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: reveal 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  }
+  .reveal:nth-child(1) { animation-delay: 0.05s; }
+  .reveal:nth-child(2) { animation-delay: 0.2s; }
+  .reveal:nth-child(3) { animation-delay: 0.35s; }
+  .reveal:nth-child(4) { animation-delay: 0.5s; }
+  @keyframes reveal {
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1 -->
+<section class="slide grid-bg">
+  <div class="container">
+    <h1 class="wordmark reveal">BAYANA</h1>
+    <div class="accent-bar reveal"></div>
+    <div class="eyebrow-orange reveal">COMPLIANCE INFRASTRUCTURE FOR DIGITAL ASSETS</div>
+    <p class="lede reveal">Plug &amp; play licensed, non-custodial AI compliance infrastructure for digital assets.</p>
+  </div>
+</section>
+
+<!-- SLIDE 12 -->
+<section class="slide grid-bg">
+  <div class="container slide-cta-inner">
+    <div class="cta-top">
+      <div class="eyebrow-tight">BAYANA FIRST MOVERS ADVANTAGE</div>
+      <h2 class="headline">IS OPEN.</h2>
+      <p class="subtext">AI COMPLIANCE NATIVE INFRASTRUCTURE READY TO FLOW DIGITAL ASSETS</p>
+      <div class="underline-accent"></div>
+    </div>
+    <div class="founder">
+      <div class="founder-name">Guantai Kathurima</div>
+      <div class="founder-title">Founder &amp; CEO, Bayana</div>
+      <a class="founder-email" href="mailto:Guantaik@proton.me">Guantaik@proton.me</a>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
