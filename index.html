@@ -4,18 +4,23 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Bayana — Compliance Infrastructure for Digital Assets</title>
-<meta name="description" content="Plug & play licensed, non-custodial AI compliance infrastructure for digital assets." />
+<meta name="description" content="Plug & play licensed, non-custodial AI compliance infrastructure for digital assets. Launching 2026." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root {
     --bg: #0a0a0a;
+    --bg-2: #111111;
     --fg: #ffffff;
     --muted: #9a9a9a;
+    --dim: #5a5a5a;
     --accent: #ff4d1f;
+    --accent-glow: rgba(255, 77, 31, 0.18);
     --grid: #1a1a1a;
+    --line: #222;
     --font: 'Archivo', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,6 +38,7 @@
   ::selection { background: var(--accent); color: #000; }
   a { color: inherit; text-decoration: none; }
 
+  /* ── BACKGROUND GRID + ORANGE GLOW ─────────────────── */
   .grid-bg::before {
     content: '';
     position: absolute;
@@ -44,6 +50,18 @@
     pointer-events: none;
     z-index: 0;
   }
+  .glow {
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(40px);
+  }
+  .glow.top-right { top: -300px; right: -200px; }
+  .glow.bottom-left { bottom: -400px; left: -200px; opacity: 0.6; }
 
   .container {
     max-width: 1400px;
@@ -51,36 +69,120 @@
     padding: 0 64px;
     width: 100%;
     position: relative;
-    z-index: 1;
+    z-index: 2;
   }
   @media (max-width: 768px) {
-    .container { padding: 0 28px; }
+    .container { padding: 0 24px; }
   }
 
-  .slide {
+  /* ── TOP NAV / STATUS BAR ─────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background: rgba(10, 10, 10, 0.7);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 18px 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  @media (max-width: 768px) {
+    .nav-inner { padding: 14px 24px; }
+  }
+  .brand {
+    font-weight: 900;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+  }
+  .status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 0 var(--accent);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 77, 31, 0.7); }
+    70% { box-shadow: 0 0 0 12px rgba(255, 77, 31, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 77, 31, 0); }
+  }
+  .nav-cta {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+  .nav-cta:hover { color: var(--fg); }
+  @media (max-width: 540px) {
+    .nav-cta { display: none; }
+  }
+
+  /* ── HERO ─────────────────────────────────────────── */
+  .hero {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
-    padding: 80px 0;
+    padding: 140px 0 100px;
+    overflow: hidden;
   }
 
-  /* SLIDE 1 */
+  .meta-row {
+    display: flex;
+    gap: 32px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 64px;
+    flex-wrap: wrap;
+  }
+  .meta-row span::before {
+    content: '◇ ';
+    color: var(--accent);
+    margin-right: 4px;
+  }
+
   .wordmark {
     font-weight: 900;
-    font-size: clamp(72px, 16vw, 240px);
+    font-size: clamp(64px, 16vw, 240px);
     line-height: 0.92;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.045em;
     margin-bottom: 56px;
+    position: relative;
   }
-
-  .accent-bar {
+  .wordmark::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -28px;
     width: 280px;
     max-width: 60%;
     height: 5px;
     background: var(--accent);
-    margin-bottom: 44px;
   }
 
   .eyebrow-orange {
@@ -89,7 +191,7 @@
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    margin-bottom: 56px;
+    margin-bottom: 48px;
     line-height: 1.2;
   }
 
@@ -101,17 +203,54 @@
     line-height: 1.5;
   }
 
-  /* SLIDE 12 */
-  .slide-cta-inner {
+  /* ── MARQUEE ──────────────────────────────────────── */
+  .marquee {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 28px 0;
+    overflow: hidden;
+    background: var(--bg);
+    position: relative;
+    z-index: 3;
+  }
+  .marquee-track {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: calc(100vh - 160px);
+    gap: 48px;
+    white-space: nowrap;
+    animation: scroll 40s linear infinite;
+    width: max-content;
+  }
+  .marquee-item {
+    font-family: var(--mono);
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--fg);
+    display: flex;
+    align-items: center;
+    gap: 48px;
+  }
+  .marquee-item::after {
+    content: '✦';
+    color: var(--accent);
+    font-size: 12px;
+  }
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 
-  .cta-top { padding-top: 40px; }
-
-  .eyebrow-tight {
+  /* ── CTA / IS OPEN SECTION ────────────────────────── */
+  .cta {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding: 120px 0;
+    overflow: hidden;
+  }
+  .cta-eyebrow {
     color: var(--accent);
     font-size: clamp(13px, 1.3vw, 20px);
     font-weight: 700;
@@ -119,64 +258,107 @@
     text-transform: uppercase;
     margin-bottom: 40px;
   }
-
   .headline {
     font-weight: 900;
     font-size: clamp(80px, 18vw, 280px);
     line-height: 0.88;
     letter-spacing: -0.045em;
-    margin-bottom: 56px;
+    margin-bottom: 48px;
   }
-
   .subtext {
     color: var(--fg);
     font-size: clamp(14px, 1.5vw, 24px);
     font-weight: 400;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     max-width: 1100px;
     line-height: 1.4;
   }
-
   .underline-accent {
     width: 320px;
     max-width: 60%;
     height: 3px;
     background: var(--accent);
+    margin-bottom: 80px;
   }
 
-  .founder { padding-bottom: 20px; }
-  .founder-name {
-    font-weight: 700;
-    font-size: clamp(20px, 1.8vw, 28px);
-    text-decoration: underline;
-    text-underline-offset: 6px;
-    text-decoration-thickness: 1px;
-    margin-bottom: 8px;
+  /* CONTACT CARD */
+  .contact-card {
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    padding: 32px 36px;
+    max-width: 560px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    transition: border-color 0.2s, transform 0.2s;
   }
-  .founder-title {
+  .contact-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .contact-card .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
     color: var(--muted);
-    font-size: clamp(14px, 1.1vw, 17px);
     margin-bottom: 8px;
   }
-  .founder-email {
-    color: var(--accent);
-    font-size: clamp(14px, 1.1vw, 17px);
-    transition: opacity 0.2s;
+  .contact-card .email {
+    font-weight: 700;
+    font-size: clamp(18px, 1.8vw, 22px);
+    color: var(--fg);
   }
-  .founder-email:hover { opacity: 0.75; }
+  .contact-card .arrow {
+    color: var(--accent);
+    font-size: 24px;
+    font-weight: 700;
+    transition: transform 0.2s;
+  }
+  .contact-card:hover .arrow { transform: translateX(4px); }
+  @media (max-width: 540px) {
+    .contact-card { padding: 24px 24px; gap: 16px; }
+  }
 
-  /* Reveal */
+  /* ── FOOTER ───────────────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 32px 0;
+    position: relative;
+    z-index: 2;
+  }
+  .footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+  @media (max-width: 768px) {
+    .footer-inner { padding: 0 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
+  }
+
+  /* ── REVEAL ANIMATIONS ────────────────────────────── */
   .reveal {
     opacity: 0;
     transform: translateY(20px);
-    animation: reveal 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+    animation: reveal 1s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
   }
-  .reveal:nth-child(1) { animation-delay: 0.05s; }
-  .reveal:nth-child(2) { animation-delay: 0.2s; }
-  .reveal:nth-child(3) { animation-delay: 0.35s; }
-  .reveal:nth-child(4) { animation-delay: 0.5s; }
+  .reveal-1 { animation-delay: 0.1s; }
+  .reveal-2 { animation-delay: 0.25s; }
+  .reveal-3 { animation-delay: 0.4s; }
+  .reveal-4 { animation-delay: 0.55s; }
+  .reveal-5 { animation-delay: 0.7s; }
   @keyframes reveal {
     to { opacity: 1; transform: translateY(0); }
   }
@@ -184,27 +366,76 @@
 </head>
 <body>
 
-<!-- SLIDE 1 -->
-<section class="slide grid-bg">
+<!-- TOP NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="brand">BAYANA</div>
+    <div class="status">
+      <span class="pulse-dot"></span>
+      <span>Coming Soon · 2026</span>
+    </div>
+    <a href="#contact" class="nav-cta">Get Notified →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero grid-bg">
+  <div class="glow top-right"></div>
   <div class="container">
-    <h1 class="wordmark reveal">BAYANA</h1>
-    <div class="accent-bar reveal"></div>
-    <div class="eyebrow-orange reveal">COMPLIANCE INFRASTRUCTURE FOR DIGITAL ASSETS</div>
-    <p class="lede reveal">Plug &amp; play licensed, non-custodial AI compliance infrastructure for digital assets.</p>
+    <div class="meta-row reveal reveal-1">
+      <span>Nairobi · Kenya</span>
+      <span>Pre-Seed 2026</span>
+      <span>Licensed · Non-custodial</span>
+    </div>
+    <h1 class="wordmark reveal reveal-2">BAYANA</h1>
+    <div class="eyebrow-orange reveal reveal-3" style="margin-top: 24px;">COMPLIANCE INFRASTRUCTURE FOR DIGITAL ASSETS</div>
+    <p class="lede reveal reveal-4">Plug &amp; play licensed, non-custodial AI compliance infrastructure for digital assets.</p>
   </div>
 </section>
 
-<!-- SLIDE 12 -->
-<section class="slide grid-bg">
-  <div class="container slide-cta-inner">
-    <div class="cta-top">
-      <div class="eyebrow-tight">BAYANA FIRST MOVERS ADVANTAGE</div>
-      <h2 class="headline">IS OPEN.</h2>
-      <p class="subtext">AI COMPLIANCE NATIVE INFRASTRUCTURE READY TO FLOW DIGITAL ASSETS</p>
-      <div class="underline-accent"></div>
-    </div>
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <div class="marquee-item">Compliance Native</div>
+    <div class="marquee-item">Non-Custodial</div>
+    <div class="marquee-item">VASP Ready</div>
+    <div class="marquee-item">KRA eTIMS</div>
+    <div class="marquee-item">MPC Architecture</div>
+    <div class="marquee-item">Institutional Grade</div>
+    <div class="marquee-item">Compliance Native</div>
+    <div class="marquee-item">Non-Custodial</div>
+    <div class="marquee-item">VASP Ready</div>
+    <div class="marquee-item">KRA eTIMS</div>
+    <div class="marquee-item">MPC Architecture</div>
+    <div class="marquee-item">Institutional Grade</div>
+  </div>
+</div>
+
+<!-- CTA / IS OPEN -->
+<section id="contact" class="cta grid-bg">
+  <div class="glow bottom-left"></div>
+  <div class="container">
+    <div class="cta-eyebrow">BAYANA FIRST MOVERS ADVANTAGE</div>
+    <h2 class="headline">IS OPEN.</h2>
+    <p class="subtext">AI COMPLIANCE NATIVE INFRASTRUCTURE READY TO FLOW DIGITAL ASSETS</p>
+    <div class="underline-accent"></div>
+    <a href="mailto:Guantaik@proton.me" class="contact-card">
+      <div>
+        <div class="label">Get In Touch</div>
+        <div class="email">Guantaik@proton.me</div>
+      </div>
+      <div class="arrow">→</div>
+    </a>
   </div>
 </section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>© 2026 Bayana</div>
+    <div>Compliance Infrastructure · Nairobi</div>
+  </div>
+</footer>
 
 </body>
 </html>
